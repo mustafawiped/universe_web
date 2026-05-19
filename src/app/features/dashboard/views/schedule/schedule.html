@@ -1,0 +1,41 @@
+<div class="schedule-view">
+  <div class="view-header">
+    <h2>📅 Ders Programı</h2>
+    <span class="schedule-semester">2025-2026 Bahar Dönemi</span>
+  </div>
+
+  <div class="schedule-table-wrapper">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th class="time-col">Saat</th>
+          @for (day of weekdays; track day) {
+            <th>{{ day }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (time of timeSlots; track time) {
+          <tr>
+            <td class="time-cell">{{ time }}</td>
+            @for (day of weekdays; track day) {
+              @if (!isOccupied(day, time)) {
+                @if (getEntryForSlot(day, time); as entry) {
+                  <td class="course-cell" [attr.rowspan]="getSpan(entry)" [style.border-left-color]="entry.color">
+                    <div class="course-block" [style.background]="entry.color + '12'">
+                      <span class="course-code" [style.color]="entry.color">{{ entry.courseCode }}</span>
+                      <span class="course-name">{{ entry.course }}</span>
+                      <span class="course-meta">{{ entry.room }} · {{ entry.instructor.split(' ').slice(-1)[0] }}</span>
+                    </div>
+                  </td>
+                } @else {
+                  <td class="empty-cell"></td>
+                }
+              }
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

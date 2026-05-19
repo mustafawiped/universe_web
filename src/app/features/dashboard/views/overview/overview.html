@@ -1,0 +1,65 @@
+<!-- Overview — Dashboard Home -->
+<div class="overview">
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    @for (stat of stats; track stat.label) {
+      <div class="stat-card">
+        <div class="stat-icon" [style.background]="stat.color + '15'" [style.color]="stat.color">
+          {{ stat.icon }}
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Two column layout -->
+  <div class="overview-grid">
+
+    <!-- Recent Announcements -->
+    <section class="overview-card">
+      <div class="card-header">
+        <h2>Son Duyurular</h2>
+        <a routerLink="../announcements" class="card-link">Tümünü Gör →</a>
+      </div>
+      <div class="card-body">
+        @for (a of recentAnnouncements; track a.id) {
+          <div class="announcement-row">
+            <div class="ann-source" [class]="'src-' + a.source">{{ getSourceLabel(a.source) }}</div>
+            <div class="ann-content">
+              <h4>{{ a.title }}</h4>
+              <p>{{ a.body | slice:0:80 }}...</p>
+            </div>
+            <span class="ann-date">{{ a.date }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="overview-card">
+      <div class="card-header">
+        <h2>Yaklaşan Etkinlikler</h2>
+        <a routerLink="../events" class="card-link">Tümünü Gör →</a>
+      </div>
+      <div class="card-body">
+        @for (e of upcomingEvents; track e.id) {
+          <div class="event-row">
+            <div class="event-date-box" [style.border-color]="e.category === 'akademik' ? '#8b5cf6' : e.category === 'sosyal' ? '#f59e0b' : e.category === 'kariyer' ? '#10b981' : '#3b82f6'">
+              <span class="event-day">{{ e.date.split('-')[2] }}</span>
+              <span class="event-month">{{ e.date.split('-')[1] === '05' ? 'May' : 'Haz' }}</span>
+            </div>
+            <div class="event-info">
+              <h4>{{ e.title }}</h4>
+              <p>📍 {{ e.location }} · 🕐 {{ e.time }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+  </div>
+</div>

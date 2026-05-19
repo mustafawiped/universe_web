@@ -1,0 +1,92 @@
+<div class="premium-root">
+  <div class="premium-layout">
+    <aside class="luxury-panel">
+      <div class="luxury-overlay"></div>
+      <div class="luxury-content">
+        <div class="crest-wrapper">
+          <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+            <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="rgba(212, 175, 55, 0.1)" stroke="var(--accent-gold)" stroke-width="2"/>
+            <path d="M30 40 L50 30 L70 40 L70 60 L50 70 L30 60 Z" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="4" fill="var(--accent-gold)"/>
+          </svg>
+        </div>
+        <h1 class="premium-title">UniVerse</h1>
+        <h2 class="premium-subtitle">Yeni Öğrenci Kaydı</h2>
+        <p class="premium-desc">Geleceği şekillendiren zihinlerin buluşma noktasına adım atmak üzeresiniz. Lütfen bilgilerinizi OBS üzerinden teyit edin.</p>
+      </div>
+    </aside>
+
+    <main class="form-panel">
+      <div class="glass-form-card register-card">
+        <h2 class="form-heading">Hesap Oluştur</h2>
+        <p class="form-subheading">Aramıza katılmak için ilk adımı atın.</p>
+        
+        <div class="form-body" [class.verified-state]="isVerified()">
+          <div class="form-row">
+            <div class="floating-group">
+              <input class="floating-input" type="text" id="rFirstName" placeholder=" " [(ngModel)]="studentData.firstName" [disabled]="isVerified()"/>
+              <label class="floating-label" for="rFirstName">Adınız</label>
+              <div class="focus-border"></div>
+            </div>
+            <div class="floating-group">
+              <input class="floating-input" type="text" id="rLastName" placeholder=" " [(ngModel)]="studentData.lastName" [disabled]="isVerified()"/>
+              <label class="floating-label" for="rLastName">Soyadınız</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+
+          <div class="floating-group">
+            <input class="floating-input" type="text" id="rStudentNum" placeholder=" " [(ngModel)]="studentData.studentNumber" [disabled]="isVerified()"/>
+            <label class="floating-label" for="rStudentNum">Öğrenci Numarası</label>
+            <div class="focus-border"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="floating-group">
+              <input class="floating-input" type="text" id="rDept" placeholder=" " [(ngModel)]="studentData.department" [disabled]="isVerified()"/>
+              <label class="floating-label" for="rDept">Bölüm</label>
+              <div class="focus-border"></div>
+            </div>
+            <div class="floating-group">
+              <input class="floating-input" type="text" id="rGrade" placeholder=" " [(ngModel)]="studentData.grade" [disabled]="isVerified()"/>
+              <label class="floating-label" for="rGrade">Sınıf</label>
+              <div class="focus-border"></div>
+            </div>
+          </div>
+
+          <!-- OBS Verification Pulse Button -->
+          <div class="obs-verification-section">
+            <button class="pulse-verify-btn" (click)="verifyObs()" [disabled]="isVerified() || isVerifying()" [class.verified]="isVerified()">
+              <span class="btn-text" *ngIf="!isVerifying() && !isVerified()">OBS ile Teyit Et</span>
+              <span class="btn-text" *ngIf="isVerifying()">Doğrulanıyor...</span>
+              <span class="btn-text" *ngIf="isVerified()">✓ OBS Onaylandı</span>
+              <div class="pulse-ring" *ngIf="!isVerified() && !isVerifying()"></div>
+            </button>
+            
+            <div class="verification-msg" [class.error]="verificationError()" *ngIf="verificationMsg()">
+              {{ verificationMsg() }}
+            </div>
+          </div>
+
+          <div class="slide-down-section" *ngIf="isVerified()">
+            <div class="floating-group">
+              <input class="floating-input" type="password" id="rPassword" placeholder=" " [(ngModel)]="password" />
+              <label class="floating-label" for="rPassword">Yeni Parola Belirleyin</label>
+              <div class="focus-border"></div>
+            </div>
+
+            <button class="shimmer-btn" (click)="onSubmit()" [disabled]="!isVerified() || isRegistering()">
+              <span *ngIf="!isRegistering()">Kayıt İşlemini Tamamla</span>
+              <span class="loader" *ngIf="isRegistering()">Sistem Hazırlanıyor...</span>
+            </button>
+          </div>
+
+          <div class="register-prompt" *ngIf="!isVerified()">
+            Zaten hesabınız var mı?
+            <a routerLink="/login" class="register-link">Sisteme Giriş Yap</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="premium-root">
+  <div class="premium-layout">
+    <!-- Luxury Branding Panel -->
+    <aside class="luxury-panel">
+      <div class="luxury-overlay"></div>
+      <div class="luxury-content">
+        <div class="crest-wrapper">
+          <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+            <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="rgba(212, 175, 55, 0.1)" stroke="var(--accent-gold)" stroke-width="2"/>
+            <path d="M30 40 L50 30 L70 40 L70 60 L50 70 L30 60 Z" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="4" fill="var(--accent-gold)"/>
+          </svg>
+        </div>
+        <h1 class="premium-title">UniVerse</h1>
+        <h2 class="premium-subtitle">Dijital Akademi ve Yaşam Portalı</h2>
+        <p class="premium-desc">Geleceği şekillendiren zihinlerin buluşma noktası. Sınırsız akademik kaynağa ve resmi iletişime hoş geldiniz.</p>
+      </div>
+      <div class="luxury-footer">
+        &copy; 2026 UniVerse Yönetim Bilişim Sistemleri
+      </div>
+    </aside>
+
+    <!-- Glassmorphism Form Panel -->
+    <main class="form-panel">
+      <div class="glass-form-card">
+        <h2 class="form-heading">Sisteme Giriş</h2>
+        <p class="form-subheading">Lütfen kurumsal bilgilerinizi doğrulayın.</p>
+
+        <!-- Sliding Tabs -->
+        <div class="sliding-tabs">
+          <div class="tab-indicator" [class.staff-active]="activeTab === 'staff'"></div>
+          <button class="tab-btn" [class.active]="activeTab === 'student'" (click)="setTab('student')">Öğrenci</button>
+          <button class="tab-btn" [class.active]="activeTab === 'staff'" (click)="setTab('staff')">Akademisyen</button>
+        </div>
+
+        <div class="form-body">
+          <!-- Floating Label Input -->
+          <div class="floating-group">
+            <input
+              class="floating-input"
+              type="text"
+              id="emailInput"
+              placeholder=" "
+              [(ngModel)]="email"
+              autocomplete="username"
+            />
+            <label class="floating-label" for="emailInput">Kurumsal E-posta veya Numara</label>
+            <div class="focus-border"></div>
+          </div>
+
+          <!-- Floating Label Password -->
+          <div class="floating-group password-group">
+            <input
+              class="floating-input"
+              [type]="showPassword ? 'text' : 'password'"
+              id="passwordInput"
+              placeholder=" "
+              [(ngModel)]="password"
+              autocomplete="current-password"
+            />
+            <label class="floating-label" for="passwordInput">Parola</label>
+            <div class="focus-border"></div>
+            <button class="toggle-pw" type="button" (click)="togglePassword()">
+              <svg *ngIf="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg *ngIf="showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+
+          <!-- Error Alert -->
+          <div class="premium-error" *ngIf="errorMsg()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            {{ errorMsg() }}
+          </div>
+
+          <div class="form-actions-row">
+            <label class="remember-me">
+              <input type="checkbox" />
+              <span>Beni Hatırla</span>
+            </label>
+            <a href="#" class="forgot-link">Parolamı Unuttum</a>
+          </div>
+
+          <button class="shimmer-btn" (click)="onSubmit()" [disabled]="isLoading()">
+            <span *ngIf="!isLoading()">Güvenli Giriş Yap</span>
+            <span class="loader" *ngIf="isLoading()">Doğrulanıyor...</span>
+          </button>
+
+          <div class="register-prompt" *ngIf="activeTab === 'student'">
+            Henüz kaydınız yok mu?
+            <a routerLink="/register" class="register-link">Öğrenci Kaydı Başlat</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

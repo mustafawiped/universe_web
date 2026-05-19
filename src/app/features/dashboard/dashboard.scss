@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════════
+   Dashboard Shell — Layout & Sidebar Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.dash-root { display: flex; min-height: 100vh; background: var(--bg-primary); }
+
+/* ── Sidebar ───────────────────────────────── */
+.dash-sidebar {
+  width: 272px;
+  background: rgba(4, 8, 18, 0.95);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  padding: 0;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.8; }
+
+  svg { filter: drop-shadow(0 0 8px rgba(212,175,55,0.3)); }
+}
+
+.brand-text {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.brand-gold { color: var(--accent-gold); }
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.5rem 0.75rem;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+
+  &:hover {
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.85);
+  }
+
+  &.active {
+    background: rgba(212,175,55,0.1);
+    color: var(--accent-gold);
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: var(--accent-gold);
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.sidebar-icon { font-size: 1.1rem; flex-shrink: 0; width: 24px; text-align: center; }
+.sidebar-label { flex: 1; }
+
+.sidebar-badge {
+  font-size: 0.68rem;
+  background: rgba(212,175,55,0.15);
+  color: var(--accent-gold);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.sidebar-footer {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: auto;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+}
+
+.user-avatar {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-gold), #b8911e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #080f1e;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.logout-item {
+  &:hover {
+    background: rgba(239,68,68,0.08) !important;
+    color: #fca5a5 !important;
+  }
+}
+
+/* ── Main Content ──────────────────────────── */
+.dash-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dash-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  background: rgba(6, 13, 26, 0.6);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+.topbar-greeting {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+.greeting-name { color: #fff; font-weight: 600; }
+
+.topbar-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.15rem;
+}
+
+.topbar-avatar {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-gold), #b8911e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #080f1e;
+}
+
+.dash-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 2.5rem;
+}
+
+/* ── Responsive ────────────────────────────── */
+@media (max-width: 768px) {
+  .dash-sidebar { display: none; }
+  .dash-content { padding: 1.5rem; }
+  .dash-topbar { padding: 1.25rem 1.5rem; }
+}

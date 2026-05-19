@@ -1,0 +1,35 @@
+<div class="clubs-view">
+  <div class="view-header">
+    <h2>🎭 Kulüpler</h2>
+    <div class="filter-tabs">
+      <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">Tüm Kulüpler</button>
+      <button class="filter-btn" [class.active]="activeFilter() === 'member'" (click)="setFilter('member')">Kulüplerim</button>
+      <button class="filter-btn" [class.active]="activeFilter() === 'pending'" (click)="setFilter('pending')">Bekleyen</button>
+    </div>
+  </div>
+
+  <div class="clubs-grid">
+    @for (club of filteredClubs; track club.id) {
+      <div class="club-card" [id]="'club-' + club.id">
+        <div class="club-header">
+          <span class="club-category">{{ club.category }}</span>
+          @if (club.status !== 'none') {
+            <span class="club-status" [class]="'status-' + club.status">{{ getStatusLabel(club.status) }}</span>
+          }
+        </div>
+        <h3>{{ club.name }}</h3>
+        <p>{{ club.desc }}</p>
+        <div class="club-footer">
+          <span class="club-members">👥 {{ club.memberCount }} üye</span>
+          @if (club.status === 'none') {
+            <button class="club-action-btn apply" (click)="applyToClub(club.id)">Başvur</button>
+          } @else if (club.status === 'member') {
+            <button class="club-action-btn leave" (click)="requestLeave(club.id)">Ayrıl</button>
+          } @else {
+            <button class="club-action-btn pending" disabled>Bekliyor...</button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

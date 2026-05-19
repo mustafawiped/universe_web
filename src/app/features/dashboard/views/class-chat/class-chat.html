@@ -1,0 +1,36 @@
+<div class="chat-view">
+  <div class="chat-header">
+    <h2>💬 Sınıf Sohbeti</h2>
+    <span class="chat-class">Bilgisayar Müh. 3-A · 32 üye</span>
+  </div>
+
+  <div class="chat-messages" id="chat-scroll">
+    @for (msg of messages(); track msg.id) {
+      <div class="chat-bubble" [class.own]="msg.isOwn">
+        @if (!msg.isOwn) {
+          <div class="bubble-avatar">{{ msg.senderAvatar }}</div>
+        }
+        <div class="bubble-content">
+          @if (!msg.isOwn) {
+            <span class="bubble-sender">{{ msg.sender }}</span>
+          }
+          <p>{{ msg.content }}</p>
+          <span class="bubble-time">{{ msg.timestamp }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="chat-input-bar">
+    <input type="text" class="chat-input" placeholder="Mesaj yazın..."
+           [(ngModel)]="newMessage"
+           (keydown)="onKeyDown($event)"
+           id="chat-message-input" />
+    <button class="chat-send-btn" (click)="sendMessage()" [disabled]="!newMessage.trim()" id="chat-send-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>

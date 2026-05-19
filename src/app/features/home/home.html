@@ -1,0 +1,285 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     UniVerse — Landing Page
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- ── Particle Canvas (delegated to shared component) ────────── -->
+<app-particle-canvas [particleCount]="80" [connectionDistance]="120" />
+
+<!-- ── Navigation ─────────────────────────────────────────────── -->
+<nav class="uv-nav" id="main-nav">
+  <div class="nav-container">
+    <a class="nav-brand" (click)="navigateTo('/')">
+      <div class="brand-icon">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+          <path d="M50 8 L88 28 L88 72 L50 92 L12 72 L12 28 Z"
+            fill="rgba(212,175,55,0.15)" stroke="#d4af37" stroke-width="2.5"/>
+          <path d="M50 22 L72 33 L72 57 L50 68 L28 57 L28 33 Z"
+            fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="50" cy="50" r="5" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="brand-name">Uni<span class="brand-accent">Verse</span></span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Özellikler</a>
+      <a href="#how-it-works" class="nav-link">Nasıl Çalışır</a>
+      <a href="#about" class="nav-link">Hakkında</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn-ghost" (click)="navigateTo('/login')" id="nav-login-btn">Giriş Yap</button>
+      <button class="btn-primary" (click)="navigateTo('/register')" id="nav-register-btn">
+        Kayıt Ol
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero Section ────────────────────────────────────────────── -->
+<section class="hero-section" id="hero">
+  <!-- Ambient orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-content">
+    <!-- Badge -->
+    <div class="hero-badge reveal">
+      <span class="badge-dot"></span>
+      Ahi Evran Üniversitesi Resmi Platformu
+    </div>
+
+    <h1 class="hero-title reveal">
+      Akademik Dünyaya<br/>
+      <span class="gradient-text">Kapı Açıyor</span>
+    </h1>
+
+    <p class="hero-subtitle reveal">
+      UniVerse ile öğrenciler, akademisyenler ve rektörlük tek çatı altında buluşuyor.<br/>
+      OBS entegrasyonu, anlık iletişim, duyurular ve çok daha fazlası.
+    </p>
+
+    <div class="hero-actions reveal">
+      <button class="cta-primary" (click)="navigateTo('/register')" id="hero-register-btn">
+        <span>Hemen Başla</span>
+        <div class="cta-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </button>
+      <button class="cta-secondary" (click)="navigateTo('/login')" id="hero-login-btn">
+        Sisteme Giriş
+      </button>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar reveal">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-item">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+        @if (!$last) {
+          <div class="stat-divider"></div>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- Floating UI card mockup -->
+  <div class="hero-visual reveal">
+    <div class="mock-card">
+      <div class="mock-header">
+        <div class="mock-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="mock-title">UniVerse Dashboard</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-notification">
+          <div class="mock-notif-icon" style="background: rgba(212,175,55,0.2)">📢</div>
+          <div>
+            <div class="mock-notif-title">Rektörlük Duyurusu</div>
+            <div class="mock-notif-desc">2025-2026 Bahar dönemi final takvimi yayınlandı.</div>
+          </div>
+        </div>
+        <div class="mock-notification">
+          <div class="mock-notif-icon" style="background: rgba(59,130,246,0.2)">💬</div>
+          <div>
+            <div class="mock-notif-title">Sınıf Grubu</div>
+            <div class="mock-notif-desc">Bilgisayar Müh. 3-A: Proje sunumu Salı 10:00</div>
+          </div>
+        </div>
+        <div class="mock-notification">
+          <div class="mock-notif-icon" style="background: rgba(16,185,129,0.2)">📊</div>
+          <div>
+            <div class="mock-notif-title">Yeni Anket</div>
+            <div class="mock-notif-desc">Kampüs memnuniyeti anketi — katılın!</div>
+          </div>
+        </div>
+        <div class="mock-progress-bar">
+          <span>OBS Notu Ortalaması</span>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+          <span class="progress-val">3.48 GPA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>Kaydır</span>
+  </div>
+</section>
+
+<!-- ── Features Section ───────────────────────────────────────── -->
+<section class="features-section" id="features">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-tag">Özellikler</div>
+      <h2 class="section-title">Her ihtiyacınız tek platformda</h2>
+      <p class="section-desc">
+        Akademik yaşamın tüm boyutlarını kapsayan kapsamlı dijital ekosistem.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      @for (f of features; track f.title) {
+        <div class="feature-card reveal">
+          <div class="feature-icon" [style.color]="f.color" [style.background]="f.color + '18'">
+            <span [innerHTML]="f.icon"></span>
+          </div>
+          <h3 class="feature-title">{{ f.title }}</h3>
+          <p class="feature-desc">{{ f.desc }}</p>
+          <div class="feature-glow" [style.background]="f.color + '12'"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works Section ───────────────────────────────────── -->
+<section class="how-section" id="how-it-works">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <div class="section-tag">Başlangıç</div>
+      <h2 class="section-title">3 adımda platforma katıl</h2>
+    </div>
+
+    <div class="steps-wrapper">
+      <div class="steps-line"></div>
+      @for (step of steps; track step.num) {
+        <div class="step-item reveal">
+          <div class="step-num">{{ step.num }}</div>
+          <div class="step-content">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.desc }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="how-cta reveal">
+      <button class="cta-primary large" (click)="navigateTo('/register')" id="how-register-btn">
+        <span>Kayıt Olmak İstiyorum</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── About Section ──────────────────────────────────────────── -->
+<section class="about-section" id="about">
+  <div class="section-container">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <div class="section-tag">Hakkımızda</div>
+        <h2 class="section-title left-align">Ahi Evran Üniversitesi için doğdu, tüm Türkiye için büyüyor</h2>
+        <p>
+          UniVerse, Kırşehir Ahi Evran Üniversitesi rektörlüğünün desteğiyle hayata geçirilen,
+          öğrencilerin ve akademisyenlerin dijital dönüşümünü hızlandırmak amacıyla geliştirilen
+          kurumsal bir akademik platformdur.
+        </p>
+        <p>
+          İlk aşamada Ahi Evran Üniversitesi'ne özel entegre edilmekte olan platform,
+          ilerleyen süreçte Türkiye'deki tüm üniversitelerin kullanımına sunulmak üzere
+          ölçeklenebilir bir altyapı üzerine inşa edilmiştir.
+        </p>
+        <div class="about-badges">
+          <div class="about-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Rektörlük Onaylı
+          </div>
+          <div class="about-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            7/24 Erişim
+          </div>
+          <div class="about-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            SSL Güvenli
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="university-crest">
+          <svg width="180" height="180" viewBox="0 0 200 200" fill="none">
+            <!-- Outer hexagon -->
+            <path d="M100 10 L182 55 L182 145 L100 190 L18 145 L18 55 Z"
+              stroke="rgba(212,175,55,0.4)" stroke-width="1.5" fill="rgba(212,175,55,0.04)"/>
+            <!-- Inner hexagon -->
+            <path d="M100 35 L158 68 L158 132 L100 165 L42 132 L42 68 Z"
+              stroke="rgba(212,175,55,0.25)" stroke-width="1" fill="rgba(212,175,55,0.04)"/>
+            <!-- Star/shield center -->
+            <circle cx="100" cy="100" r="30" stroke="#d4af37" stroke-width="1.5" fill="rgba(212,175,55,0.08)"/>
+            <text x="100" y="108" text-anchor="middle" font-size="28" fill="#d4af37" font-weight="700" font-family="Playfair Display, serif">UV</text>
+            <!-- Corner accents -->
+            <circle cx="100" cy="15" r="4" fill="#d4af37" opacity="0.7"/>
+            <circle cx="177" cy="57.5" r="4" fill="#d4af37" opacity="0.7"/>
+            <circle cx="177" cy="142.5" r="4" fill="#d4af37" opacity="0.7"/>
+            <circle cx="100" cy="185" r="4" fill="#d4af37" opacity="0.7"/>
+            <circle cx="23" cy="142.5" r="4" fill="#d4af37" opacity="0.7"/>
+            <circle cx="23" cy="57.5" r="4" fill="#d4af37" opacity="0.7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Banner ──────────────────────────────────────────────── -->
+<section class="cta-banner reveal">
+  <div class="cta-banner-bg"></div>
+  <div class="cta-banner-content">
+    <h2>Akademik yolculuğunuza bugün başlayın</h2>
+    <p>Ahi Evran Üniversitesi öğrencisi veya personeliyseniz hemen kayıt olabilirsiniz.</p>
+    <div class="cta-banner-actions">
+      <button class="cta-primary" (click)="navigateTo('/register')" id="banner-register-btn">
+        Öğrenci Kaydı
+      </button>
+      <button class="cta-ghost" (click)="navigateTo('/login')" id="banner-login-btn">
+        Personel Girişi
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer class="uv-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <span class="brand-name">Uni<span class="brand-accent">Verse</span></span>
+      <p>Ahi Evran Üniversitesi Akademik Platform</p>
+    </div>
+    <div class="footer-copy">
+      © 2026 UniVerse — Tüm hakları saklıdır.
+    </div>
+  </div>
+</footer>

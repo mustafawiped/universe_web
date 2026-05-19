@@ -1,0 +1,75 @@
+<div class="events-view">
+  <div class="view-header">
+    <h2>🎉 Etkinlikler</h2>
+    <div class="header-actions">
+      <div class="filter-tabs">
+        <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">Tümü</button>
+        <button class="filter-btn" [class.active]="activeFilter() === 'akademik'" (click)="setFilter('akademik')">Akademik</button>
+        <button class="filter-btn" [class.active]="activeFilter() === 'sosyal'" (click)="setFilter('sosyal')">Sosyal</button>
+        <button class="filter-btn" [class.active]="activeFilter() === 'spor'" (click)="setFilter('spor')">Spor</button>
+        <button class="filter-btn" [class.active]="activeFilter() === 'kariyer'" (click)="setFilter('kariyer')">Kariyer</button>
+      </div>
+      <button class="create-event-btn" (click)="toggleCreateForm()" id="create-event-btn">
+        @if (showCreateForm()) { ✕ İptal } @else { + Etkinlik Oluştur }
+      </button>
+    </div>
+  </div>
+
+  <!-- Create Event Form -->
+  @if (showCreateForm()) {
+    <div class="create-form">
+      <h3>Yeni Etkinlik Oluştur</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Başlık</label>
+          <input type="text" [(ngModel)]="newEvent.title" placeholder="Etkinlik adı" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label>Tarih</label>
+          <input type="date" [(ngModel)]="newEvent.date" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label>Saat</label>
+          <input type="time" [(ngModel)]="newEvent.time" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label>Konum</label>
+          <input type="text" [(ngModel)]="newEvent.location" placeholder="Örn: D-201" class="form-input" />
+        </div>
+        <div class="form-group full-width">
+          <label>Açıklama</label>
+          <textarea [(ngModel)]="newEvent.desc" placeholder="Etkinlik detayları..." class="form-input textarea" rows="3"></textarea>
+        </div>
+      </div>
+      <button class="submit-event-btn" (click)="createEvent()" [disabled]="!newEvent.title || !newEvent.date">
+        Etkinliği Oluştur
+      </button>
+    </div>
+  }
+
+  <!-- Events Grid -->
+  <div class="events-grid">
+    @for (event of filteredEvents; track event.id) {
+      <div class="event-card" [id]="'event-' + event.id">
+        <div class="event-card-top">
+          <span class="event-category" [style.background]="getCategoryColor(event.category) + '15'" [style.color]="getCategoryColor(event.category)">
+            {{ getCategoryLabel(event.category) }}
+          </span>
+          @if (event.isOwner) {
+            <span class="owner-badge">👑 Sizin</span>
+          }
+        </div>
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.desc }}</p>
+        <div class="event-card-meta">
+          <span>📅 {{ event.date }} · 🕐 {{ event.time }}</span>
+          <span>📍 {{ event.location }}</span>
+        </div>
+        <div class="event-card-footer">
+          <span class="event-organizer">{{ event.organizer }}</span>
+          <span class="event-attendees">👥 {{ event.attendeeCount }} katılımcı</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

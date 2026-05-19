@@ -1,0 +1,30 @@
+<div class="announcements-view">
+  <div class="view-header">
+    <h2>📢 Duyurular</h2>
+    <div class="filter-tabs">
+      <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">Tümü</button>
+      <button class="filter-btn" [class.active]="activeFilter() === 'rektorluk'" (click)="setFilter('rektorluk')">Rektörlük</button>
+      <button class="filter-btn" [class.active]="activeFilter() === 'bolum'" (click)="setFilter('bolum')">Bölüm</button>
+      <button class="filter-btn" [class.active]="activeFilter() === 'sinif'" (click)="setFilter('sinif')">Sınıf</button>
+    </div>
+  </div>
+
+  <div class="announcements-list">
+    @for (a of filteredAnnouncements; track a.id) {
+      <article class="ann-card" [class.high-priority]="a.priority === 'high'">
+        <div class="ann-card-top">
+          <span class="ann-source-tag" [class]="'src-' + a.source">{{ getSourceLabel(a.source) }}</span>
+          @if (a.priority === 'high') {
+            <span class="priority-badge">⚡ Önemli</span>
+          }
+          <span class="ann-card-date">{{ a.date }}</span>
+        </div>
+        <h3>{{ a.title }}</h3>
+        <p>{{ a.body }}</p>
+        <div class="ann-card-footer">
+          <span class="ann-author">{{ a.author }}</span>
+        </div>
+      </article>
+    }
+  </div>
+</div>

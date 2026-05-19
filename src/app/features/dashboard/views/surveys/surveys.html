@@ -1,0 +1,44 @@
+<div class="surveys-view">
+  <div class="view-header">
+    <h2>📊 Anketler</h2>
+  </div>
+
+  <div class="surveys-list">
+    @for (survey of surveys(); track survey.id) {
+      <div class="survey-card" [class.completed]="survey.isCompleted" [id]="'survey-' + survey.id">
+        <div class="survey-top">
+          @if (survey.isCompleted) {
+            <span class="survey-status completed">✓ Katıldınız</span>
+          } @else {
+            <span class="survey-status active">Aktif</span>
+          }
+          <span class="survey-deadline">📅 Son: {{ survey.deadline }}</span>
+        </div>
+        <h3>{{ survey.title }}</h3>
+        <p>{{ survey.desc }}</p>
+
+        <!-- Vote bars (visible after completion) -->
+        @if (survey.isCompleted) {
+          <div class="vote-results">
+            @for (opt of survey.options; track opt.label) {
+              <div class="vote-row">
+                <span class="vote-label">{{ opt.label }}</span>
+                <div class="vote-bar-track">
+                  <div class="vote-bar-fill" [style.width.%]="(opt.votes / getMaxVotes(survey)) * 100"></div>
+                </div>
+                <span class="vote-count">{{ opt.votes }}</span>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="survey-footer">
+          <span class="survey-responses">{{ survey.totalResponses }} katılımcı</span>
+          @if (!survey.isCompleted) {
+            <button class="survey-participate-btn" (click)="participateSurvey(survey.id)">Ankete Katıl</button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
